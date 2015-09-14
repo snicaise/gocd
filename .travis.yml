@@ -8,6 +8,7 @@ before_install:
 install:
   - pip install ansible
   - "{ echo '[defaults]'; echo 'roles_path = ../'; } >> ansible.cfg"
+  - ssh-keygen -t rsa -N "" -f ~/.ssh/id_gocd
 
 script:
   # Check the role syntax
