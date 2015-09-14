@@ -1,0 +1,5 @@
+---
+
+- hosts: all
+  roles:
+    - { role: gocd, gocd_server: true, gocd_agent: true }
