@@ -1,0 +1,7 @@
+---
+
+- name: restart go-server
+  service: name=go-server state=restarted
+
+- name: restart go-agent
+  service: name=go-agent state=restarted

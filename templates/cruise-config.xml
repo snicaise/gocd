@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cruise>
+  <server>
+    <security>
+      <passwordFile path="{{ gocd_server_password_file }}" />
+      <admins>
+        <user>{{ gocd_admin_user }}</user>
+      </admins>
+    </security>
+  </server>
+</cruise>

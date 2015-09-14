@@ -1,0 +1,11 @@
+---
+
+- name: Install gocd agent
+  apt: pkg=go-agent={{ gocd_version }} state=present
+
+- name: Create gocd agent defaults file
+  template: src=go-agent-defaults dest=/etc/default/go-agent owner=go group=go mode=0644
+  notify: restart go-agent
+
+- name: Enable gocd agent
+  service: name=go-agent state=started enabled=yes
