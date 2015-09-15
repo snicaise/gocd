@@ -11,7 +11,9 @@ install:
 script:
 - ansible-playbook -i tests/inventory tests/site.yml --syntax-check
 
-cache: pip
+cache:
+  directories:
+    - $HOME/.cache/pip
 
 notifications:
   slack:
