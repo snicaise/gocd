@@ -8,7 +8,11 @@ before_install:
   - sudo apt-get update -qq
 
 install:
-  - sudo apt-get install -q virtualbox virtualbox-dkms virtualbox-ose-dkms linux-headers-amd64 --fix-missing
+  - sudo apt-get install -q virtualbox virtualbox-dkms virtualbox-ose-dkms linux-headers-generic --fix-missing
+  - sudo dpkg-reconfigure virtualbox-dkms
+  - sudo dpkg-reconfigure virtualbox
+  - sudo modprobe vboxdrv
+  - sudo modprobe vboxnetflt
   - sudo wget -nv https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.deb
   - sudo dpkg -i vagrant_1.7.4_x86_64.deb
   - sudo pip install ansible
