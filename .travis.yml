@@ -8,6 +8,7 @@ install:
 - sudo apt-get install -q virtualbox --fix-missing
 - sudo wget -nv https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_i686.deb
 - sudo dpkg -i vagrant_1.7.4_i686.deb
+- bundle install
 - pip install ansible
 - ssh-keygen -t rsa -N "" -f ~/.ssh/id_gocd
 
