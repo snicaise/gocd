@@ -11,4 +11,4 @@ export AGENT_WORK_DIR
 
 DAEMON=Y
 VNC=N
-export JAVA_HOME="/usr/lib/jvm/java-7-openjdk-amd64/jre" # SET_BY_GO_INSTALLER__DONT_REMOVE
+export JAVA_HOME="/usr/lib/jvm/java-7-openjdk-amd64/jre"
