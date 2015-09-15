@@ -1,19 +1,25 @@
 language: python
 python: '2.7'
 
+language: ruby
+rvm: 1.9.3
+
 before_install:
-- sudo apt-get update -qq
+  - sudo apt-get update -qq
 
 install:
-- sudo apt-get install -q virtualbox --fix-missing
-- sudo wget -nv https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_i686.deb
-- sudo dpkg -i vagrant_1.7.4_i686.deb
-- bundle install
-- pip install ansible
-- ssh-keygen -t rsa -N "" -f ~/.ssh/id_gocd
+  - sudo apt-get install -q virtualbox --fix-missing
+  - sudo wget -nv https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_i686.deb
+  - sudo dpkg -i vagrant_1.7.4_i686.deb
+  - pip install ansible
+  - ssh-keygen -t rsa -N "" -f ~/.ssh/id_gocd
 
 script:
-- vagrant up
+  - sudo vagrant up
+
+after-script:
+  - sudo vagrant halt
+  - sudo vagrant destroy
 
 notifications:
   slack:
