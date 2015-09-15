@@ -1,9 +1,0 @@
----
-
-- hosts: goserver
-  roles:
-    - { role: gocd, gocd_server: true, gocd_agent: false }
-
-- hosts: goagents
-  roles:
-    - { role: gocd, gocd_server: false, gocd_agent: true, gocd_server_host: "{{ hostvars['goserver']['ansible_eth0']['ipv4']['address'] }}" }
