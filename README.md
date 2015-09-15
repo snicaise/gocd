@@ -1,41 +1,52 @@
-
+# GoCD
 [![Build Status](https://travis-ci.org/snicaise/gocd.svg?branch=master)](https://travis-ci.org/snicaise/gocd)
 
-Role Name
-=========
+Installs and configures [Go CD](http://www.go.cd) on Ubuntu.
 
-A brief description of the role goes here.
+## Requirements
+- This role requires Ansible 1.9 or higher.
+- SSH keys, primarily for git SSH access.
 
-Requirements
-------------
+## Role Variables
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Name                      | Default                               | Description
+------------------------- | ------------------------------------- | ----------------------------------------------------------------------
+gocd_version              | 15.2.0-2248                           | Version of Go CD to install
+gocd_server_host          | localhost                             | Used by go-agent to connect to go-server
+gocd_server_port          | 8153                                  | Which port the go-server binds to, and accepts HTTP connections from.
+gocd_admin_user           | admin                                 | Default admin user
+gocd_admin_password       | password                              | Default admin password
+gocd_server_password_file | /etc/go/passwd                        | Password file path
+gocd_java_home            | /usr/lib/jvm/java-7-openjdk-amd64/jre | JAVA_HOME used by go-server and go-agent
+gocd_ssh_private_key      | ~/.ssh/id_gocd                        | GIT SSH private key
+gocd_ssh_public_key       | ~/.ssh/id_gocd.pub                    | GIT SSH public key
+gocd_ssh_know_hosts       | github.com, bitbucket.org             | Domain to import as a known host.
 
-Role Variables
---------------
+## Dependencies
+None.
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+## Example Playbook
+Generate a new SSH key pair for git : [github](https://help.github.com/articles/generating-ssh-keys/), [bitbucket](https://confluence.atlassian.com/bitbucket/set-up-ssh-for-git-728138079.html), [gitlab](http://doc.gitlab.com/ce/ssh/README.html).
 
-Dependencies
-------------
+Install Go CD server and agent on same host :
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+```
+- hosts: all
+  roles:
+    - { role: gocd, gocd_server: true, gocd_agent: true }
+```
 
-Example Playbook
-----------------
+Install Go CD agents on different hosts, specifying go-server address :
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+```
+- hosts: goserver
+  roles:
+    - { role: gocd, gocd_server: true, gocd_agent: false }
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+- hosts: goagents-java
+  roles:
+    - { role: gocd, gocd_server: false, gocd_agent: true, gocd_server_host: "{{ hostvars['goserver']['ansible_eth0']['ipv4']['address'] }}" }
+```
 
-License
--------
-
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+## License
+MIT
