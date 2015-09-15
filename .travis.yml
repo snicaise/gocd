@@ -11,7 +11,7 @@ script:
 - ansible-playbook -i tests/inventory tests/test.yml --connection=local --sudo
 - ansible-playbook -i tests/inventory tests/test.yml --connection=local --sudo > idempotent.log
 - cat idempotent.log
-- grep -q 'changed=0.*failed=0' idempotent.log && (echo 'Idempotence test: pass' && exit 0) || (echo 'Idempotence test: fail' && exit 1)
+- "grep -q 'changed=0.*failed=0' idempotent.log && (echo 'Idempotence test: pass' && exit 0) || (echo 'Idempotence test: fail' && exit 1)"
 notifications:
   slack:
     secure: Yy9H8ROXmNgXPbW3sNJrkq3UaESQzkm7syer/sW96E7EFwF+3fSEmEsk3GukWmM4G7hV7jiltfxTuWcac8dwS/3ViIFlHjk85CC/E7koxLD/ojoIyUgslhsJ0qthRx/SLTvBG3TiwDhh7PmIFvh5cxoK/ufQ+vzQ+iij/meTUbsapoBqsvny39iF61l3Ryt+pTUFaefNDKCZkPScZPI5BH1JUji0/11wpgHXAFZtHTNIvQRs8QKsutSH0ZDS5heb8UHOP3R7PYQjt8yDPYWT+06eFEbcXU9Rhkn3VvaKsGjMJCJtGEV2Y0CDjfJOL9AtKX/5Gm1fv7kSaYfqiGbo3RB2oyzeXx0uq9hiHM3eOdj1kzkhMimQucP6fsNL3mzfY0ZZZi8aGax92lGjXUQ7Ebg9fv1a1vECxA0+dVkoQxDEbdM366q/3Q/1BpwVhEKkQT0UMD0JbXdTK8s9I/J7OO5DycFsGhPHGSDfK3+UjZ0M+eWiQPNIcLeDYefPslOivDx2JqSEVVFPb0QGgdepq+zWnVA8GXcRpfVlaqC1YU0/3urlHgDeIXdZ2KdFbHZqIwqfofzixQ8r0cmOOeRaUZuAb0gO7iPOr5RNlx3UPYF06tlLqyM23yHDDWDUKJox4G2WS1sxtniYpvNSDxraoX7xYOq1c5qBArDjqRQCpCM=
