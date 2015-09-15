@@ -1,8 +1,7 @@
 language: python
 python: '2.7'
 
-before_install:
-- sudo apt-get update -q
+sudo: false
 
 install:
 - pip install ansible
@@ -11,6 +10,8 @@ install:
 
 script:
 - ansible-playbook -i tests/inventory tests/site.yml --syntax-check
+
+cache: pip
 
 notifications:
   slack:
