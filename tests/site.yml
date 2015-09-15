@@ -6,10 +6,10 @@
     - { role: gocd, gocd_server: true, gocd_agent: true }
 
   post_tasks:
-    - wait_for: host=192.168.10.2 port={{ gocd_server_port }}
+    - wait_for: host=127.0.0.1 port={{ gocd_server_port }}
 
     - uri:
-        url: "http://192.168.10.2:{{ gocd_server_port }}/go/api/users"
+        url: "http://127.0.0.1:{{ gocd_server_port }}/go/api/users"
         HEADER_Accept: "application/vnd.go.cd.v1+json"
         user: "{{ gocd_admin_user }}"
         password: "{{ gocd_admin_password }}"
@@ -23,7 +23,7 @@
          - "'admin' in all_users.content"
 
     - uri:
-        url: "http://192.168.10.2:{{ gocd_server_port }}/go/api/agents"
+        url: "http://127.0.0.1:{{ gocd_server_port }}/go/api/agents"
         HEADER_Accept: "application/vnd.go.cd.v1+json"
         user: "{{ gocd_admin_user }}"
         password: "{{ gocd_admin_password }}"
