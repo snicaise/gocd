@@ -16,6 +16,7 @@ install:
 
 script:
   - cd tests
+  - sudo VBoxManage --version
   - sudo vagrant up
 
 after-script:
