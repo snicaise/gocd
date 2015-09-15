@@ -15,6 +15,7 @@ install:
   - ssh-keygen -t rsa -N "" -f ~/.ssh/id_gocd
 
 script:
+  - cd tests
   - sudo vagrant up
 
 after-script:
