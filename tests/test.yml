@@ -1,5 +1,37 @@
 ---
 
 - hosts: all
+
   roles:
     - { role: gocd, gocd_server: true, gocd_agent: true }
+
+  post_tasks:
+    - wait_for: host=127.0.0.1 port={{ gocd_server_port }}
+
+    - uri:
+        url: "http://127.0.0.1:{{ gocd_server_port }}/go/api/users"
+        HEADER_Accept: "application/vnd.go.cd.v1+json"
+        user: "{{ gocd_admin_user }}"
+        password: "{{ gocd_admin_password }}"
+        method: GET
+        status_code: 200
+        return_content: yes
+      register: all_users
+    - debug: var=all_users
+    - assert:
+       that:
+         - "'admin' in all_users.content"
+
+    - uri:
+        url: "http://127.0.0.1:{{ gocd_server_port }}/go/api/agents"
+        HEADER_Accept: "application/vnd.go.cd.v1+json"
+        user: "{{ gocd_admin_user }}"
+        password: "{{ gocd_admin_password }}"
+        method: GET
+        status_code: 200
+        return_content: yes
+      register: all_agents
+    - debug: var=all_agents
+    - assert:
+       that:
+         - (all_agents.content | from_json)._embedded.agents|length == 1
