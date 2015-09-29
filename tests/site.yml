@@ -3,7 +3,7 @@
 - hosts: all
 
   roles:
-    - { role: gocd, gocd_server: true, gocd_agent: true }
+    - { role: gocd, gocd_server: true, gocd_agent: true, gocd_java_home: /usr/lib/jvm/java-7-oracle/jre }
 
   post_tasks:
     - wait_for: host=127.0.0.1 port={{ gocd_server_port }}
