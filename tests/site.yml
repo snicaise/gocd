@@ -1,6 +1,6 @@
 ---
 
-- hosts: all
+- hosts: 127.0.0.1
 
   roles:
     - { role: gocd, gocd_server: true, gocd_agent: true, gocd_java_home: /usr/lib/jvm/java-7-oracle/jre }
