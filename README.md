@@ -14,6 +14,7 @@ Name                      | Default                               | Description
 gocd_version              | 15.2.0-2248                           | Version of Go CD to install
 gocd_server_host          | localhost                             | Used by go-agent to connect to go-server
 gocd_server_port          | 8153                                  | Which port the go-server binds to, and accepts HTTP connections from.
+gocd_agent_count          | 1                                     | Install multiple agents on the same machine
 gocd_admin_user           | admin                                 | Default admin user
 gocd_admin_password       | password                              | Default admin password
 gocd_server_password_file | /etc/go/passwd                        | Password file path
@@ -45,7 +46,7 @@ Install Go CD agents on different hosts, specifying go-server address :
 
 - hosts: goagents-java
   roles:
-    - { role: gocd, gocd_server: false, gocd_agent: true, gocd_server_host: "{{ hostvars['goserver']['ansible_eth0']['ipv4']['address'] }}" }
+    - { role: gocd, gocd_server: false, gocd_agent: true, gocd_server_host: "{{ hostvars['goserver']['ansible_eth0']['ipv4']['address'] }}", gocd_agent_count: 2 }
 ```
 
 ## License

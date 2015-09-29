@@ -17,3 +17,5 @@ gocd_ssh_public_key: ~/.ssh/id_gocd.pub
 gocd_ssh_know_hosts:
   - github.com
   - bitbucket.org
+
+gocd_agent_count: 1
